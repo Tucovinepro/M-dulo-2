@@ -1,21 +1,25 @@
-process.stdout.write("Digite seu nome e idade separados por vírgula:\n");
+let nome = ""
 
 process.stdin.setEncoding("utf8");
 
+process.stdout.write("Digite seu nome: ");
+
 process.stdin.on("data", (entrada) => {
-    const [nome, idadeTexto] = entrada.trim().split(",");
 
-    const idade = Number(idadeTexto);
+    if(!nome){
 
-    if (idade < 18) {
-        process.stdout.write(
-            `Olá, ${nome}! Seu voto é facultativo a partir dos 16 anos.\n`
-        );
+        nome = String(entrada.trim());
+
+        process.stdout.write("Digite sua idade: ");
+
     } else {
-        process.stdout.write(
-            `Olá, ${nome}! Seu voto é obrigatório, não se esqueça.\n`
-        );
+
+        idade = Number(entrada.trim());
+
+        process.stdout.write(`Olá ${nome}! Vc tem ${idade} anos`);
+
+        process.exit()
     }
 
-    process.exit();
-});
+    
+})
