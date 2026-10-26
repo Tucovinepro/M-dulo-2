@@ -10,6 +10,13 @@ process.stdin.on("data", (entrada) => {
 
     if (etapa === 0) {
         nome = entrada.trim();
+
+        if (nome === "") {
+            console.error("Erro: o nome não pode estar vazio.");
+             process.stdout.write("Digite seu nome: ");
+               return;
+           }
+
         etapa = 1;
 
         process.stdout.write("Digite sua idade: ");
@@ -24,6 +31,14 @@ process.stdin.on("data", (entrada) => {
             );
             process.exit();
         }
+        
+        else if (isNaN(idade) || idade < 0 || idade > 130) {
+             
+            console.error("valor fora dos limites, tente novamente.");
+            
+            process.stdout.write("Digite sua idade: ");
+
+            return; }
 
         etapa = 2;
         process.stdout.write(`Olá ${nome}! Você possui CNH? (sim/não): `);
@@ -32,9 +47,19 @@ process.stdin.on("data", (entrada) => {
     else if (etapa === 2) {
         let cnh = entrada.trim().toLowerCase();
 
-        if (cnh === "sim") {
+        
+    if (cnh !== "sim" && cnh !== "não" && cnh !== "nao") {
+        
+        console.error("Erro: responda apenas com 'sim' ou 'não'.");
+
+        process.stdout.write("Você possui CNH? (sim/não): ");
+        
+        return; 
+      }
+
+       else if (cnh === "sim") {
             process.stdout.write(
-                `Parabéns, ${nome}! Você possui CNH e já pode dirigir legalmente.\n`
+                `Parabéns, ${nome}! Você já pode dirigir, que legal.\n`
             );
         } else {
             process.stdout.write(
