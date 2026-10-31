@@ -34,7 +34,7 @@ process.stdin.on("data", (entrada) => {
 
         } 
         
-        else if(isNaN(idade) || idade < 0 || idade > 100) {
+        else if(isNaN(idade) || idade < 0 || idade > 130) {
              
             console.error("valor fora dos limites, tente novamente.");
             
